@@ -26,18 +26,30 @@ function App() {
       console.error("Error fetching data:", error);
     }
   };
-
+  const saveToLocalStorage = (items: Movie[]) => {
+    localStorage.setItem("favorite-movies", JSON.stringify(items));
+  };
   useEffect(() => {
     getMoviesRequest(searchValue);
   }, [searchValue]);
 
+  useEffect(() => {
+    const storedFavoriteMovies = localStorage.getItem("favorite-movies");
+
+    if (storedFavoriteMovies !== null) {
+      const favoriteMovies = JSON.parse(storedFavoriteMovies);
+      setFavoriteMovies(favoriteMovies);
+    }
+  }, []);
+
   const addFavoriteMovie = (movie: Movie) => {
     const favoriteMoviesList = [...favoriteMovies, movie];
     setFavoriteMovies(favoriteMoviesList);
+    saveToLocalStorage(favoriteMoviesList);
   };
   const removeFavoriteMovie = (movie: Movie) => {
     const favoriteMoviesList = favoriteMovies.filter(
-      (movie) => movie.imdbID != movie.imdbID
+      (mov) => mov.imdbID !== movie.imdbID
     );
     setFavoriteMovies(favoriteMoviesList);
   };
