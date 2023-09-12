@@ -1,13 +1,31 @@
 import MovieDetails from "./components/MovieDetails";
 import MoviesList, { Movie, MoviesProps } from "./components/MoviesList";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import ListHeader from "./components/ListHeader";
 import SearchBox from "./components/SearchBox";
+import Navbar from "./components/Navbar";
 
+const initialMovies = [
+  {
+    Title: "Breaking Bad Season 3: Silent But Deadly - The Brothers Moncada",
+    Year: "2011",
+    imdbID: "tt2380191",
+    Type: "movie",
+    Poster: "N/A",
+  },
+  {
+    Title: "Snow Globe: A Breaking Bad Short",
+    Year: "2020",
+    imdbID: "tt11828264",
+    Type: "movie",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BNzZlODUzY2UtYzU3My00M2EzLTgzOGUtNzlmZTQwNWE2MTVjXkEyXkFqcGdeQXVyMTQ0NjE2NTI@._V1_SX300.jpg",
+  },
+];
 function App() {
-  const [movies, setMovies] = useState<Array<Movie>>([]);
+  const [movies, setMovies] = useState<Array<Movie>>(initialMovies);
 
   const [searchValue, setSearchValue] = useState("");
   const [favoriteMovies, setFavoriteMovies] = useState<Array<Movie>>([]);
@@ -55,19 +73,37 @@ function App() {
   };
   return (
     <div className="App">
-      <ListHeader mainTitle="Movies" />
-      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-      <MoviesList
-        movies={movies}
-        handleFavoriteMovies={addFavoriteMovie}
-        isFavoriteList={false}
-      />
-      <ListHeader mainTitle="Favorites" />
-      <MoviesList
-        movies={favoriteMovies}
-        handleFavoriteMovies={removeFavoriteMovie}
-        isFavoriteList={true}
-      />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MoviesList
+                  movies={movies}
+                  handleFavoriteMovies={addFavoriteMovie}
+                  isFavoriteList={false}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                />
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <MoviesList
+                  movies={favoriteMovies}
+                  handleFavoriteMovies={removeFavoriteMovie}
+                  isFavoriteList={true}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                />
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }

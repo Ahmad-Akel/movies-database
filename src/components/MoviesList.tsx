@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,8 +9,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Button, Typography } from "@mui/material";
-import { Box } from "@material-ui/core";
-
+import ListHeader from "./ListHeader";
+import SearchBox from "./SearchBox";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 export interface Movie {
   Title?: string;
   Year?: string;
@@ -19,27 +20,37 @@ export interface Movie {
   Type?: string;
   Poster?: string;
 }
+
 export interface MoviesProps {
   movies: Movie[];
   handleFavoriteMovies: (movie: Movie) => void;
   isFavoriteList: boolean;
+  searchValue: string;
+  setSearchValue: (val: string) => void;
 }
 
 export default function MoviesList({
   movies,
   handleFavoriteMovies,
   isFavoriteList,
+  searchValue,
+  setSearchValue,
 }: MoviesProps) {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "16px",
-        }}
-      ></div>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          {<ListHeader mainTitle={isFavoriteList ? "Favorites" : "Movies"} />}
+        </Grid>
+        <Grid item xs={4} style={{ marginTop: "25px" }}>
+          {
+            <SearchBox
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+          }
+        </Grid>
+      </Grid>
 
       <Box
         style={{
