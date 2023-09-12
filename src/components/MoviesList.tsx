@@ -13,6 +13,7 @@ import ListHeader from "./ListHeader";
 import SearchBox from "./SearchBox";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
 export interface Movie {
   Title?: string;
   Year?: string;
@@ -61,43 +62,48 @@ export default function MoviesList({
       >
         {movies.map((movie) => (
           <Card key={movie.imdbID} sx={{ maxWidth: 345, margin: "16px" }}>
-            <CardHeader
-              style={{ backgroundColor: "black" }}
-              avatar={
-                <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
-                  R
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
+            <Link
+              to={`/movie/${movie.imdbID}`}
+              style={{ textDecoration: "none" }}
+            >
+              <CardHeader
+                style={{ backgroundColor: "black" }}
+                avatar={
+                  <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
+                    R
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={movie.Title}
+                subheader={movie.Type}
+              />
+              <CardMedia
+                component="img"
+                height="194"
+                image={movie.Poster}
+                alt={movie.Title}
+              />
+              <CardContent>
+                <Typography variant="body2" color="text.secondary">
+                  {movie.Year}
+                </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => handleFavoriteMovies(movie)}
+                >
+                  {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
                 </IconButton>
-              }
-              title={movie.Title}
-              subheader={movie.Type}
-            />
-            <CardMedia
-              component="img"
-              height="194"
-              image={movie.Poster}
-              alt={movie.Title}
-            />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {movie.Year}
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton
-                aria-label="add to favorites"
-                onClick={() => handleFavoriteMovies(movie)}
-              >
-                {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
-              </IconButton>
-              <IconButton aria-label="share">
-                <Button>See Details</Button>
-              </IconButton>
-            </CardActions>
+                <IconButton aria-label="share">
+                  <Button>See Details</Button>
+                </IconButton>
+              </CardActions>
+            </Link>
           </Card>
         ))}
       </Box>

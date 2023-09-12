@@ -101,6 +101,7 @@ function App() {
                 />
               }
             />
+            <Route path="/movie/:imdbID" element={<MovieDetails />} />
           </Routes>
         </div>
       </Router>
