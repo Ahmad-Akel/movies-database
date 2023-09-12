@@ -1,19 +1,61 @@
-import "./App.css";
 import MovieDetails from "./components/MovieDetails";
-import MoviesList from "./components/MoviesList";
+import MoviesList, { Movie, MoviesProps } from "./components/MoviesList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import FavoriteMovies from "./components/FavoriteMovies";
+
+import { useEffect, useState } from "react";
+import ListHeader from "./components/ListHeader";
+import SearchBox from "./components/SearchBox";
 
 function App() {
+  const [movies, setMovies] = useState<Array<Movie>>([]);
+
+  const [searchValue, setSearchValue] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState<Array<Movie>>([]);
+  const getMoviesRequest = async (searchValue: string) => {
+    try {
+      const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=e18d063c`;
+      const response = await fetch(url);
+      const responseJson = await response.json();
+      console.log(responseJson);
+      if (responseJson.Search) {
+        setMovies(responseJson.Search);
+      } else {
+        console.error("API response is missing the Search field.");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getMoviesRequest(searchValue);
+  }, [searchValue]);
+
+  const addFavoriteMovie = (movie: Movie) => {
+    const favoriteMoviesList = [...favoriteMovies, movie];
+    setFavoriteMovies(favoriteMoviesList);
+  };
+  const removeFavoriteMovie = (movie: Movie) => {
+    const favoriteMoviesList = favoriteMovies.filter(
+      (movie) => movie.imdbID != movie.imdbID
+    );
+    setFavoriteMovies(favoriteMoviesList);
+  };
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MoviesList />} />
-          <Route path="/favorite" element={<FavoriteMovies />} />
-          <Route path="/movie" element={<MovieDetails />} />
-        </Routes>
-      </BrowserRouter>
+      <ListHeader mainTitle="Movies" />
+      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+      <MoviesList
+        movies={movies}
+        handleFavoriteMovies={addFavoriteMovie}
+        isFavoriteList={false}
+      />
+      <ListHeader mainTitle="Favorites" />
+      <MoviesList
+        movies={favoriteMovies}
+        handleFavoriteMovies={removeFavoriteMovie}
+        isFavoriteList={true}
+      />
     </div>
   );
 }

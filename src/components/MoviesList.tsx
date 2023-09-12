@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -5,42 +6,54 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Button } from "@mui/material";
-import { TextField } from "@material-ui/core";
+import { Button, Typography } from "@mui/material";
+import { Box } from "@material-ui/core";
 
-const moviesData = [
-  {
-    id: 1,
-    title: "First Movie",
-    subheader: "September 14, 2016",
-    image: "https://picsum.photos/200/300?grayscale",
-    description:
-      "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-  },
-  {
-    id: 2,
-    title: "Second Movie",
-    subheader: "September 14, 2016",
-    image: "https://picsum.photos/seed/picsum/200/300",
-    description:
-      "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-  },
-];
+export interface Movie {
+  Title?: string;
+  Year?: string;
+  imdbID?: string;
+  Type?: string;
+  Poster?: string;
+}
+export interface MoviesProps {
+  movies: Movie[];
+  handleFavoriteMovies: (movie: Movie) => void;
+  isFavoriteList: boolean;
+}
 
-export default function MoviesList() {
+export default function MoviesList({
+  movies,
+  handleFavoriteMovies,
+  isFavoriteList,
+}: MoviesProps) {
   return (
     <>
-      <TextField />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {moviesData.map((movie) => (
-          <Card key={movie.id} sx={{ maxWidth: 345, margin: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+        }}
+      ></div>
+
+      <Box
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          backgroundColor: "#1c1c1c",
+        }}
+      >
+        {movies.map((movie) => (
+          <Card key={movie.imdbID} sx={{ maxWidth: 345, margin: "16px" }}>
             <CardHeader
+              style={{ backgroundColor: "black" }}
               avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
                   R
                 </Avatar>
               }
@@ -49,23 +62,26 @@ export default function MoviesList() {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={movie.title}
-              subheader={movie.subheader}
+              title={movie.Title}
+              subheader={movie.Type}
             />
             <CardMedia
               component="img"
               height="194"
-              image={movie.image}
-              alt={movie.title}
+              image={movie.Poster}
+              alt={movie.Title}
             />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
-                {movie.description}
+                {movie.Year}
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
+              <IconButton
+                aria-label="add to favorites"
+                onClick={() => handleFavoriteMovies(movie)}
+              >
+                {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
               </IconButton>
               <IconButton aria-label="share">
                 <Button>See Details</Button>
@@ -73,7 +89,7 @@ export default function MoviesList() {
             </CardActions>
           </Card>
         ))}
-      </div>
+      </Box>
     </>
   );
 }
