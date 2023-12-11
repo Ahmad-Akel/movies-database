@@ -19,7 +19,13 @@ export interface Movie {
   Year?: string;
   imdbID?: string;
   Type?: string;
+  Writer?: string;
+  Director?: string;
   Poster?: string;
+  Awards?: string;
+  Actors?: string;
+  Plot?: string;
+  imdbRating?: string;
 }
 
 export interface MoviesProps {
@@ -37,13 +43,27 @@ export default function MoviesList({
   searchValue,
   setSearchValue,
 }: MoviesProps) {
+  const handleFavoriteClick = (event: React.MouseEvent, movie: Movie) => {
+    // Prevent the click event from propagating to the Link component
+    event.stopPropagation();
+    handleFavoriteMovies(movie);
+  };
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={8}>
           {<ListHeader mainTitle={isFavoriteList ? "Favorites" : "Movies"} />}
         </Grid>
-        <Grid item xs={4} style={{ marginTop: "25px" }}>
+        <Grid
+          item
+          xs={4}
+          style={{
+            marginTop: "25px",
+            marginBottom: "10px",
+            display: "flex",
+            flexDirection: "row-reverse",
+          }}
+        >
           {
             <SearchBox
               searchValue={searchValue}
@@ -61,13 +81,17 @@ export default function MoviesList({
         }}
       >
         {movies.map((movie) => (
-          <Card key={movie.imdbID} sx={{ maxWidth: 345, margin: "16px" }}>
+          <Card
+            key={movie.imdbID}
+            sx={{ maxWidth: 345, margin: "16px" }}
+            style={{ backgroundColor: "#f5e871" }}
+          >
             <Link
               to={`/movie/${movie.imdbID}`}
               style={{ textDecoration: "none" }}
             >
               <CardHeader
-                style={{ backgroundColor: "black" }}
+                style={{ backgroundColor: "black", color: "White" }}
                 avatar={
                   <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
                     R
@@ -95,7 +119,7 @@ export default function MoviesList({
               <CardActions disableSpacing>
                 <IconButton
                   aria-label="add to favorites"
-                  onClick={() => handleFavoriteMovies(movie)}
+                  onClick={(event) => handleFavoriteClick(event, movie)}
                 >
                   {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
                 </IconButton>

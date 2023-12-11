@@ -4,5 +4,5 @@ interface Props {
   mainTitle: string;
 }
 export default function ListHeader({ mainTitle }: Props) {
-  return <Typography variant="h1">{mainTitle}</Typography>;
+  return <Typography variant="h2">{mainTitle}</Typography>;
 }

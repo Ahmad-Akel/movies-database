@@ -7,6 +7,7 @@ interface Props {
 export default function SearchBox({ searchValue, setSearchValue }: Props) {
   return (
     <TextField
+      style={{ width: "350px" }}
       label="Search ..."
       variant="filled"
       value={searchValue}
