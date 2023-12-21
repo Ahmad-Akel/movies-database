@@ -10,11 +10,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    position: "fixed",
+    position: "static",
     bottom: 7.2,
     width: "98.5%",
     padding: theme.spacing(3, 1),
-    marginTop: "auto",
+    marginTop: "50px",
     backgroundColor: "#333333",
   },
 }));

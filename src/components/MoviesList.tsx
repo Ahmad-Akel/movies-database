@@ -94,7 +94,12 @@ export default function MoviesList({
                 style={{ backgroundColor: "black", color: "White" }}
                 avatar={
                   <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
-                    R
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image={movie.Poster}
+                      alt={movie.Title}
+                    />
                   </Avatar>
                 }
                 action={

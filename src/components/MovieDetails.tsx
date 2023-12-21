@@ -47,7 +47,6 @@ const MovieDetails = () => {
               sx={{
                 width: "700px",
                 marginTop: "50px",
-
                 marginLeft: "150px",
                 height: "95%",
               }}
@@ -207,7 +206,7 @@ const MovieDetails = () => {
                     <CardActionArea>
                       <CardContent
                         sx={{
-                          height: "100px",
+                          height: "25%",
                           width: "50%",
                         }}
                       >
