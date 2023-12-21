@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
+import LoginPage from "./components/Login";
+import RegisterPage from "./components/Register";
 const initialMovies = [
   {
     Title: "Breaking Bad Season 3: Silent But Deadly - The Brothers Moncada",
@@ -108,6 +110,8 @@ function App() {
             />
             <Route path="/about" element={<About />} />
             <Route path="/movie/:imdbID" element={<MovieDetails />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Routes>
           <Footer />
         </div>

@@ -17,6 +17,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "50px",
     backgroundColor: "#333333",
   },
+  flexContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconColumn: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginRight: theme.spacing(2), // Adjust spacing as needed
+  },
 }));
 
 const Footer = () => {
@@ -25,27 +37,27 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="sm">
-        <Typography
-          variant="body1"
-          color="textSecondary"
-          align="center"
-        ></Typography>
-        <div>
-          <Link href="https://www.facebook.com/" target="_blank">
-            <IconButton>
-              <FacebookIcon style={{ color: "white" }} />
-            </IconButton>
-          </Link>
-          <Link href="https://www.twitter.com/" target="_blank">
-            <IconButton>
-              <TwitterIcon style={{ color: "white" }} />
-            </IconButton>
-          </Link>
-          <Link href="https://www.instagram.com/" target="_blank">
-            <IconButton>
-              <InstagramIcon style={{ color: "white" }} />
-            </IconButton>
-          </Link>
+        <div className={classes.flexContainer}>
+          <div className={classes.iconColumn}>
+            <Link href="https://www.facebook.com/" target="_blank">
+              <IconButton>
+                <FacebookIcon style={{ color: "white" }} />
+              </IconButton>
+            </Link>
+            <Link href="https://www.twitter.com/" target="_blank">
+              <IconButton>
+                <TwitterIcon style={{ color: "white" }} />
+              </IconButton>
+            </Link>
+            <Link href="https://www.instagram.com/" target="_blank">
+              <IconButton>
+                <InstagramIcon style={{ color: "white" }} />
+              </IconButton>
+            </Link>
+          </div>
+          <Typography variant="body1" color="textSecondary">
+            MovieBrief - © {new Date().getFullYear()}
+          </Typography>
         </div>
       </Container>
     </footer>

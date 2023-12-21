@@ -15,10 +15,15 @@ const HomePage = () => {
         color: "white",
       }}
     >
-      <div style={{ color: "#524709" }}>
-        <h1>Welcome to the MovieBrief!</h1>
-        <h3>Discover and explore a wide range of movies.</h3>
-        <h3>Enjoy your cinematic journey with us!</h3>
+      <div style={{ color: "#252004" }}>
+        <div style={{ fontSize: "45px" }}>Welcome to the MovieBrief!</div>
+        <br />
+        <div style={{ fontSize: "25px" }}>
+          Discover and explore a wide range of movies.
+        </div>
+        <div style={{ fontSize: "25px" }}>
+          Enjoy your cinematic journey with us!
+        </div>
       </div>
     </div>
   );

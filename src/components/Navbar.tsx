@@ -13,7 +13,8 @@ import { TabList, TabPanel, TabContext } from "@mui/lab";
 import { Link } from "react-router-dom";
 import MovieLogo from "../assets/movie-logo.png";
 import { Avatar, IconButton } from "@mui/material";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import { Logout, PersonAdd, Settings, Login } from "@mui/icons-material";
+
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -42,13 +43,13 @@ function Navbar() {
           <Link to="/">
             <img
               src={MovieLogo}
-              alt="MoviesBrief Logo"
+              alt="MovieBrief Logo"
               style={{ width: "100px", marginRight: "10px" }}
             />{" "}
           </Link>
 
           <Typography variant="h4" component="div" color={"Yellow"}>
-            MoviesBrief
+            MovieBrief
           </Typography>
 
           <TabList aria-label="lab API tabs example">
@@ -164,27 +165,18 @@ function Navbar() {
           <MenuItem onClick={handleClose}>
             <Avatar /> Profile
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Avatar /> My account
-          </MenuItem>
           <Divider />
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleClose} component={Link} to="/login">
             <ListItemIcon>
-              <PersonAdd fontSize="small" />
+              <Login fontSize="small" />
             </ListItemIcon>
-            Add another account
+            Login
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleClose} component={Link} to="/register">
             <ListItemIcon>
-              <Settings fontSize="small" />
+              <Login fontSize="small" />
             </ListItemIcon>
-            Settings
-          </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
+            Register
           </MenuItem>
         </Menu>
       </TabContext>

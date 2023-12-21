@@ -45,9 +45,9 @@ const About = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography variant="h6">Anna</Typography>
+              <Typography variant="h6">Arena</Typography>
               <Typography paragraph>
-                Our data guru, Anna, works tirelessly to ensure that the movie
+                Our data guru, Arena, works tirelessly to ensure that the movie
                 information on MoviewBrief is accurate, up-to-date, and
                 comprehensive.
               </Typography>
