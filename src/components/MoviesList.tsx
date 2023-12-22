@@ -44,33 +44,15 @@ export default function MoviesList({
   setSearchValue,
 }: MoviesProps) {
   const handleFavoriteClick = (event: React.MouseEvent, movie: Movie) => {
-    // Prevent the click event from propagating to the Link component
-    event.stopPropagation();
+    event.preventDefault(); // Prevent default action
+    event.stopPropagation(); // Stop event propagation
     handleFavoriteMovies(movie);
   };
+
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={8}>
-          {<ListHeader mainTitle={isFavoriteList ? "Favorites" : "Movies"} />}
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          style={{
-            marginTop: "25px",
-            marginBottom: "10px",
-            display: "flex",
-            flexDirection: "row-reverse",
-          }}
-        >
-          {
-            <SearchBox
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-            />
-          }
-        </Grid>
+        {/* ... [Grid code] */}
       </Grid>
 
       <Box
@@ -86,30 +68,25 @@ export default function MoviesList({
             sx={{ maxWidth: 345, margin: "16px" }}
             style={{ backgroundColor: "#f5e871" }}
           >
+            <CardHeader
+              style={{ backgroundColor: "black", color: "White" }}
+              avatar={
+                <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
+                  {movie.Title && movie.Title[0]}
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={movie.Title}
+              subheader={movie.Type}
+            />
             <Link
               to={`/movie/${movie.imdbID}`}
               style={{ textDecoration: "none" }}
             >
-              <CardHeader
-                style={{ backgroundColor: "black", color: "White" }}
-                avatar={
-                  <Avatar sx={{ bgcolor: "#803131" }} aria-label="recipe">
-                    <CardMedia
-                      component="img"
-                      height="194"
-                      image={movie.Poster}
-                      alt={movie.Title}
-                    />
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title={movie.Title}
-                subheader={movie.Type}
-              />
               <CardMedia
                 component="img"
                 height="194"
@@ -121,18 +98,21 @@ export default function MoviesList({
                   {movie.Year}
                 </Typography>
               </CardContent>
-              <CardActions disableSpacing>
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={(event) => handleFavoriteClick(event, movie)}
-                >
-                  {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
-                </IconButton>
-                <IconButton aria-label="share">
-                  <Button>See Details</Button>
-                </IconButton>
-              </CardActions>
             </Link>
+            <CardActions disableSpacing>
+              <IconButton
+                aria-label="add to favorites"
+                onClick={(event) => handleFavoriteClick(event, movie)}
+              >
+                {isFavoriteList ? <DeleteIcon /> : <FavoriteIcon />}
+              </IconButton>
+              <Link
+                to={`/movie/${movie.imdbID}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Button>See Details</Button>
+              </Link>
+            </CardActions>
           </Card>
         ))}
       </Box>
