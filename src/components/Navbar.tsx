@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import {
   Tab,
   Box,
@@ -8,15 +8,25 @@ import {
   Menu,
   Divider,
   ListItemIcon,
+  FormControl,
+  SelectChangeEvent,
 } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
 import { Link } from "react-router-dom";
 import MovieLogo from "../assets/movie-logo.png";
 import { Avatar, IconButton } from "@mui/material";
 import { Logout, PersonAdd, Settings, Login } from "@mui/icons-material";
-
+import { InputLabel, Select } from "@material-ui/core";
 
 function Navbar() {
+  const [language, setLanguage] = React.useState("");
+
+  const handleChange = (
+    event: ChangeEvent<{ name?: string | undefined; value: unknown }>
+  ) => {
+    setLanguage(event.target.value as string);
+  };
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selectedTab, setSelectedTab] = React.useState("1");
   const open = Boolean(anchorEl);
@@ -113,6 +123,20 @@ function Navbar() {
                 },
               }}
             />
+            <FormControl style={{ marginLeft: "250px", marginTop: "5px" }}>
+              <InputLabel id="demo-simple-select-label"></InputLabel>
+              <Select
+                style={{ color: "white" }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={language}
+                label="Language"
+                onChange={handleChange}
+              >
+                <MenuItem value={"English"}>English</MenuItem>
+                <MenuItem value={"Czech"}>Czech</MenuItem>
+              </Select>
+            </FormControl>
           </TabList>
           <Tooltip title="Account settings">
             <IconButton

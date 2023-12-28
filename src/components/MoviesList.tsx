@@ -52,7 +52,26 @@ export default function MoviesList({
   return (
     <>
       <Grid container spacing={2}>
-        {/* ... [Grid code] */}
+        <Grid item xs={8}>
+          {<ListHeader mainTitle={isFavoriteList ? "Favorites" : "Movies"} />}
+        </Grid>
+        <Grid
+          item
+          xs={4}
+          style={{
+            marginTop: "25px",
+            marginBottom: "10px",
+            display: "flex",
+            flexDirection: "row-reverse",
+          }}
+        >
+          {
+            <SearchBox
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+          }
+        </Grid>
       </Grid>
 
       <Box
