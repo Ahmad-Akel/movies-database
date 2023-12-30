@@ -3,14 +3,13 @@ import MoviesList, { Movie, MoviesProps } from "./components/MoviesList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import ListHeader from "./components/ListHeader";
-import SearchBox from "./components/SearchBox";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/Login";
 import RegisterPage from "./components/Register";
+
 const initialMovies = [
   {
     Title: "Breaking Bad Season 3: Silent But Deadly - The Brothers Moncada",
