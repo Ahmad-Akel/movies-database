@@ -44,8 +44,8 @@ export default function MoviesList({
   setSearchValue,
 }: MoviesProps) {
   const handleFavoriteClick = (event: React.MouseEvent, movie: Movie) => {
-    event.preventDefault(); // Prevent default action
-    event.stopPropagation(); // Stop event propagation
+    event.preventDefault();
+    event.stopPropagation(); 
     handleFavoriteMovies(movie);
   };
 

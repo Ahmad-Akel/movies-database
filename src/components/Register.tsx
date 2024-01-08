@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     gap: theme.spacing(2),
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -41,10 +41,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // Handle registration logic here
     console.log("Register with:", username, email, password);
-
-    // Navigate to home page after form submission
     navigate("/");
   };
 

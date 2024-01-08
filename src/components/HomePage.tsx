@@ -6,18 +6,18 @@ import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
     "& .MuiOutlinedInput-root": {
-      height: "40px", // Adjust as needed
+      height: "40px",
       alignItems: "center",
     },
     "& .MuiOutlinedInput-input": {
-      height: "30px", // Adjust as needed
-      padding: "0 14px", // Adjust padding as needed
+      height: "30px", 
+      padding: "0 14px", 
     },
     "& .MuiInputLabel-outlined": {
-      transform: "translate(14px, 12px) scale(1)", // Adjust label position as needed
+      transform: "translate(14px, 12px) scale(1)", 
     },
     "& .MuiInputLabel-shrink": {
-      transform: "translate(14px, -6px) scale(0.75)", // Adjust label position for shrunk state
+      transform: "translate(14px, -6px) scale(0.75)",
     },
     margin: theme.spacing(1),
     width: "300px",
@@ -36,8 +36,6 @@ const HomePage = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-
-    // Simple regex for basic email validation
     const emailRegex = /\S+@\S+\.\S+/;
     if (emailRegex.test(email)) {
       console.log("Register with:", email);
@@ -82,7 +80,7 @@ const HomePage = () => {
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           id="email-input"
-          type="email" // Set the type to email to leverage HTML5 validation
+          type="email" 
           placeholder="Email address"
           variant="outlined"
           className={classes.inputRoot}

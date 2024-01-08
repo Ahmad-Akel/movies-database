@@ -40,10 +40,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // Handle registration logic here
+
     console.log("Register with:", username, password);
 
-    // Navigate to home page after form submission
     navigate("/");
   };
 

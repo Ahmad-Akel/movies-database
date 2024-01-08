@@ -13,13 +13,9 @@ import ListItem from "@mui/material/ListItem";
 
 import ListItemText from "@mui/material/ListItemText";
 const MovieDetails = () => {
-  // Get the imdbID from the route parameter
   const { imdbID } = useParams();
 
-  // State to store the movie details
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
-
-  // Function to fetch movie details by imdbID
   const fetchMovieDetails = async () => {
     try {
       const url = `http://www.omdbapi.com/?i=${imdbID}&apikey=e18d063c`;
@@ -31,12 +27,10 @@ const MovieDetails = () => {
     }
   };
 
-  // Fetch movie details when the component mounts
   useEffect(() => {
     fetchMovieDetails();
   }, [imdbID]);
 
-  // Render movie details
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
